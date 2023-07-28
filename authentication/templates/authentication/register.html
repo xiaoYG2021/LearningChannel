@@ -1,0 +1,54 @@
+{% extends "index/base.html" %}
+
+{% block title %}注册{% endblock %}
+
+{% block content %}
+<div class="card" style="margin-top: 20px;">
+  <h4 class="card-header">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-person-add" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5a.5.5 0 0 0-1 0v1h-1a.5.5 0 0 0 0 1h1v1a.5.5 0 0 0 1 0v-1h1a.5.5 0 0 0 0-1h-1v-1Zm-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/>
+      <path d="M8.256 14a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Z"/>
+    </svg>
+    注册
+  </h4>
+  <div class="card-body">
+    <form method="post" action="{% url 'authentication:register' %}">
+      {% csrf_token %}
+      <input type="hidden" value="{{ next }}" name="next">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="username"
+               name="username" placeholder="用户名"
+               value="{{ username }}">
+        <label for="username">用户名</label>
+        <div class="form-text">
+          长度限制：4~20位，只包含字母、数字、下划线或连字符。
+        </div>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="password"
+               name="password" placeholder="密码">
+        <label for="password">密码</label>
+        <div class="form-text">长度限制：0~100位。</div>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="password2"
+               name="password2" placeholder="验证密码">
+        <label for="password2">验证密码</label>
+        <div class="form-text">应与密码相同，以保证输入无误。</div>
+      </div>
+      {% if error %}
+      <div class="alert alert-danger" role="alert">
+        {{ error }}
+      </div>
+      {% endif %}
+      <a href="{% url 'authentication:login' %}"
+         class="link-primary text-decoration-none">
+        已有账号？立即登录~
+      </a>
+      <div class="d-grid">
+        <button type="submit" class="btn btn-primary">注册</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

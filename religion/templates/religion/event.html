@@ -1,0 +1,28 @@
+{% extends "religion/base.html" %}
+
+{% block title %}事件 {{ name }}{% endblock %}
+
+{% block content %}
+<div class="card" style="margin-top: 20px;">
+  <h4 class="card-header">
+    <svg width="24" height="24" viewBox="0 0 90 81" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0.46875 0.492188H41.3672V7.05469H24.6094V74.1445H82.9102V55.6875H89.5312V81H0.46875V74.3789H17.2852V7.05469H0.46875V0.492188Z"/>
+    </svg>
+    事件
+    {{ username }}
+  </h4>
+  <div class="card-body">
+    <div class="card">
+      <h5 class="card-header">
+        <svg width="20" height="20" viewBox="0 0 90 81" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.46875 0.492188H41.3672V7.05469H24.6094V74.1445H82.9102V55.6875H89.5312V81H0.46875V74.3789H17.2852V7.05469H0.46875V0.492188Z"/>
+        </svg>
+        描述
+      </h5>
+      <div class="card-body">
+          {{ description|safe }}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

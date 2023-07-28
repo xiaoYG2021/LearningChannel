@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="zh">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>宗教 - {% block title %}{% endblock %}</title>
+    <link href="{% static 'index/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'religion/img/favicon.ico' %}" rel="shortcut icon">
+  </head>
+  <body>
+    <div id="main-content">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary bg-dark" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'religion:index' %}">
+            <svg width="64" height="64" viewBox="0 0 90 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.46875 0.492188H41.3672V7.05469H24.6094V74.1445H82.9102V55.6875H89.5312V81H0.46875V74.3789H17.2852V7.05469H0.46875V0.492188Z"
+                    fill="white"/>
+            </svg>
+            宗教
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                  aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'index:index' %}">
+                  <svg width="20" height="20" viewBox="0 0 90 81" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.46875 0.492188H41.3672V7.05469H24.6094V74.1445H82.9102V55.6875H89.5312V81H0.46875V74.3789H17.2852V7.05469H0.46875V0.492188Z"/>
+                  </svg>
+                  主页
+                </a>
+              </li>
+            </ul>
+            <ul class="navbar-nav ms-auto mb-3 mb-lg-0">
+              {% if user.is_staff %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin:index' %}">
+                  <svg width="20" height="20" viewBox="0 0 90 81" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.46875 0.492188H41.3672V7.05469H24.6094V74.1445H82.9102V55.6875H89.5312V81H0.46875V74.3789H17.2852V7.05469H0.46875V0.492188Z"/>
+                  </svg>
+                  管理
+                </a>
+              </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'religion:logout' %}">
+                  <svg width="20" height="20" viewBox="0 0 90 81" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.46875 0.492188H41.3672V7.05469H24.6094V74.1445H82.9102V55.6875H89.5312V81H0.46875V74.3789H17.2852V7.05469H0.46875V0.492188Z"/>
+                  </svg>
+                  离开
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container">
+        {% block content %}{% endblock %}
+      </div>
+
+      <hr>
+
+      <div class="text-center">
+        <strong>Older Never Die, Younger Forever!</strong>
+      </div>
+    </div>
+
+    {% block extension %}{% endblock %}
+  </body>
+</html>

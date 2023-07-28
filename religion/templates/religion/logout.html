@@ -1,0 +1,11 @@
+{% extends "religion/base.html" %}
+
+{% block title %}离开{% endblock %}
+
+{% block content %}
+<a href="{% url 'index:index' %}" class="text-decoration-none">
+  <div class="alert alert-info" role="alert" style="margin-top: 20px;">
+    再见，同志。我们不会忘记你对宗教的忠诚。
+  </div>
+</a>
+{% endblock %}

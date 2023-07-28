@@ -1,0 +1,328 @@
+{% extends "religion/base.html" %}
+
+{% load static %}
+
+{% block title %}主页{% endblock %}
+
+{% block content %}
+<div class="card" style="margin-top: 20px;">
+  <h4 class="card-header text-center">
+    老教
+  </h4>
+  <div class="card-body">
+    <p id="new-button-p" class="card-text">
+      <a id="new-button" class="link-primary text-decoration-none" href="#">
+        如果你是新教徒，或仍然是教外人员，请先看这里。
+      </a>
+    </p>
+    <p class="card-text">目前，老教正在安全环境下平稳发展，但由于2020届的升学，位于松莞初中的老教总部教徒锐减。所幸，其发源地——2021届5班还在此支持老教发展。</p>
+    <p class="card-text">然而，虽然老教已经历过两年的波折，其在后届中的根基却并不稳固，虽然2022届教徒人数众多，但以目前情况来看并未形成规模，
+      老教的影响力会逐渐变弱，在更久的将来将会覆灭。</p>
+    <p class="card-text">因此，目前老教的主要任务是：在未来的两届中巩固和发展老教，形成巨大规模群体，听从中央干部指挥，发扬老教优良精神。</p>
+    <p class="card-text">此外，当前老教仍然面对着另一个严峻的问题：总部外的教徒缺乏支持。</p>
+    <p class="card-text">老教教徒虽然遍布全国各地，但是不能与总部时刻联系，不能培养忠诚精神，难以巩固和发展老教的外部力量。</p>
+    <p class="card-text">总而言之，虽然环境较为安全，但老教的前景也比较严峻。
+      作为老教的忠实教徒，我们需要抓紧2021届留在松莞的最后一年的时间，为老教献出自己的忠诚！</p>
+  </div>
+  <div class="container text-center">
+    {% if branches %}
+    <div class="card mb-3">
+      <h5 class="card-header mb-3">
+        老教分部
+      </h5>
+      <div class="card-body">
+        <div class="row mb-3">
+          {% for branch in branches %}
+          <div class="col">
+            <div class="d-grid">
+              <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#branch{{ forloop.counter }}" aria-expanded="false"
+                      aria-controls="branch{{ forloop.counter }}">
+                {{ branch.name }}
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% for branch in branches %}
+        <div class="collapse" id="branch{{ forloop.counter }}">
+          <div class="card card-body mb-3">
+            <strong>{{ branch.name }}</strong>
+            {{ branch.introduction|linebreaks }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    {% if archbishops %}
+    <div class="card mb-3">
+      <h5 class="card-header mb-3">
+        历届教主
+      </h5>
+      <div class="card-body">
+        <div class="row mb-3">
+          {% for archbishop in archbishops %}
+          <div class="col">
+            <div class="d-grid">
+              <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#archbishop{{ forloop.counter }}" aria-expanded="false"
+                      aria-controls="archbishop{{ forloop.counter }}">
+                {{ archbishop.name }}
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% for archbishop in archbishops %}
+        <div class="collapse" id="archbishop{{ forloop.counter }}">
+          <div class="card card-body mb-3">
+            <strong>{{ archbishop.name }}</strong>
+            {{ archbishop.introduction|linebreaks }}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+    <div class="card mb-3">
+      <h5 class="card-header">
+        老教历程
+      </h5>
+      <div class="card-body">
+        <div class="row mb-3">
+          {% for event in events %}
+          <div class="col">
+            <div  class="d-grid">
+              <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#event{{ forloop.counter }}"
+                      aria-expanded="false" aria-controls="event{{ forloop.counter }}">
+                {{ event.name }}
+              </button>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% for event in events %}
+        <div class="collapse" id="event{{ forloop.counter }}">
+          <div class="card mb-3">
+            <p class="card-header">
+              <strong>{{ event.name }}</strong>
+              <br>
+              时间：{{ event.time }}
+              <br>
+              影响力：{{ event.value }}
+            </p>
+            <div class="card-body">
+              {{ event.description|safe }}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+        <div class="row mb-3">
+          <div class="col">
+            <div class="d-grid">
+              <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#events"
+                      aria-expanded="false" aria-controls="events" id="events-button">
+                查看
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="collapse" id="events">
+          <div class="card card-body">
+            <embed type="image/svg+xml" src="{{ events_chart|safe }}">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <h5 class="card-header">
+        宗教制度
+      </h5>
+      <div class="card-body">
+        <div class="row">
+          <div class="col">
+            <div class="d-grid">
+              <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#system1-1" aria-expanded="false"
+                      aria-controls="system1-1">
+                老教
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="collapse" id="system1-1">
+          <div class="card">
+            <p class="card-header">
+              现任教主
+              <br>
+              宗教主席
+              |
+              奖励哥
+            </p>
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <div class="d-grid">
+                    <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#system2-1" aria-expanded="false"
+                          aria-controls="system2-1">
+                      教主
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="collapse" id="system2-1">
+                <div class="card">
+                  <p class="card-header">
+                    核心层
+                    <br>
+                    信息部
+                    |
+                    宣传部
+                    |
+                    忠实教徒
+                  </p>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                        <div class="d-grid">
+                          <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse"
+                                  data-bs-target="#system3-1" aria-expanded="false"
+                                  aria-controls="system3-1">
+                            信息部
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="d-grid">
+                          <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse"
+                                  data-bs-target="#system3-2" aria-expanded="false"
+                                  aria-controls="system3-2">
+                            宣传部
+                          </button>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="d-grid">
+                          <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse"
+                                  data-bs-target="#system3-3" aria-expanded="false"
+                                  aria-controls="system3-3">
+                            忠实教徒
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="collapse" id="system3-1">
+                      <div class="card mb-3">
+                        <p class="card-header">
+                          信息部部长
+                          <br>
+                          宗教主席
+                          |
+                          奖励哥
+                        </p>
+                        <div class="card-body">
+                          <p class="card-text">
+                            由教主担任信息部部长，负责统计宗教各类信息。
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="collapse" id="system3-2">
+                      <div class="card mb-3">
+                        <p class="card-header">
+                          宣传部部长
+                          <br>
+                          Sir
+                          |
+                          神话▇哥
+                          |
+                          B哥
+                        </p>
+                        <div class="card-body">
+                          <p class="card-text">
+                            <strong>Sir</strong>
+                            负责北区机房的宣传工作。
+                          </p>
+                          <p class="card-text">
+                            <strong>神话▇哥</strong>
+                            负责社会各类人士的宣传工作。
+                          </p>
+                          <p class="card-text">
+                            <strong>B哥</strong>
+                            负责南区机房的宣传工作。
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="collapse" id="system3-3">
+                      <div class="card mb-3">
+                        <p class="card-header">
+                          忠实教徒
+                          <br>
+                          多人
+                        </p>
+                        <div class="card-body">
+                          <p class="card-text">
+                            老教的中坚力量。
+                          </p>
+                          <p class="card-text">
+                            网站开发者：xiaoYG属于此。
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extension %}
+<div id="new-content" style="background-color: #212529;
+position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+display: none;">
+  <div class="container">
+    <div class="card text-bg-light" style="margin-top: 20px;">
+      <h4 class="card-header">
+        老教
+      </h4>
+      <div class="card-body">
+        <p class="card-text">老教是诞生于东莞市东莞中学松山湖学校初中部2021届5班的宗教。老教以“老”为信仰对象。</p>
+        <p class="card-text">老教在诞生之初冒犯了他人的人身权利。对此，老教已作出道歉。</p>
+        <div class="card mb-3">
+          <h5 class="card-header">
+            《中华人民共和国宪法》第三十六条
+          </h5>
+          <div class="card-body">
+            <p class="card-text">中华人民共和国公民有宗教信仰自由。</p>
+            <p class="card-text">任何国家机关、社会团体和个人不得强制公民信仰宗教或者不信仰宗教，不得歧视信仰宗教的公民和不信仰宗教的公民。</p>
+            <p class="card-text">国家保护正常的宗教活动。任何人不得利用宗教进行破坏社会秩序、损害公民身体健康、妨碍国家教育制度的活动。</p>
+            <p class="card-text">宗教团体和宗教事务不受外国势力的支配。</p>
+          </div>
+        </div>
+        <p class="card-text">老教不会在以后任何时期内侵犯任何人的人身权利。不允许任何人对老教进行诋毁、谩骂。</p>
+        <p class="card-text">目前，老教在全国范围内拥有众多教徒，是具有强大影响力的宗教。</p>
+        <p id="new-end-button-p" class="card-text">
+          <a id="new-end-button" class="link-primary text-decoration-none" href="#">
+            如果你有意加入老教或想了解更多，点此返回。
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{% static 'index/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'index/js/jquery.slim.min.js' %}"></script>
+<script src="{% static 'religion/js/new.js' %}"></script>
+<script src="{% static 'religion/js/events.js' %}"></script>
+{% endblock %}
